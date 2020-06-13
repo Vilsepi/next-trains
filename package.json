@@ -1,0 +1,22 @@
+{
+  "name": "next-trains",
+  "version": "1.0.0",
+  "description": "Display next local trains that get you fastest to your destination",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vilsepi/next-trains.git"
+  },
+  "author": "Ville Seppanen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vilsepi/next-trains/issues"
+  },
+  "homepage": "https://github.com/Vilsepi/next-trains#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0"
+  }
+}
