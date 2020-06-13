@@ -78,7 +78,7 @@ function main() {
         return;
     }
 
-    stationHeadingElement.innerHTML = `${fromStationCode} &#129030; ${toStationCode}`;
+    stationHeadingElement.innerHTML = `${fromStationCode} &#8680; ${toStationCode}`;
 
     //const fromStationCode = "TKL";
     //const toStationCode = "HKI";
