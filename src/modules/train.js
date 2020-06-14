@@ -1,5 +1,4 @@
 import * as Api from './xhr.js';
-const moment = window.moment;
 
 function getTrainName(train) {
     if (train.commuterLineID) {
@@ -25,16 +24,17 @@ function setBestEstimate(station) {
     }
 }
 
-async function getTrainsForStation(from, to) {
-    const now = moment().toISOString();
-    const later = moment().add(60, 'minutes').toISOString();
+async function getTrainsForStation(from) {
     const params = new URLSearchParams({
-        startDate: now,
-        endDate: later,
-        include_nonstopping: false,
+        minutes_before_departure: 120,
+        minutes_after_departure: 1,
+        minutes_before_arrival: 120,
+        minutes_after_arrival: 1,
+        train_categories: "Commuter,Long-distance",
+        include_nonstopping: false
     });
 
-    const url = `live-trains/station/${from}/${to}?${params.toString()}`;
+    const url = `live-trains/station/${from}?${params.toString()}`;
     console.log(url);
     return Api.getJson(url);
 }

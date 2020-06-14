@@ -60,6 +60,11 @@ td {
   color: #bbb;
 }
 
+.maybe {
+  font-style: italic;
+  opacity: 0.5;
+}
+
 a {
   color: #000;
   text-decoration: none;

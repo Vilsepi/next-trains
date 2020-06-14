@@ -21,8 +21,8 @@ export class Template {
             <td class="eta">${moment(fromStation.bestEstimatedTime).fromNow()}</td>
             <td class="track">${fromStation.commercialTrack}</td>
             <td class="line"><a href="https://www.junat.net/fi/juna/${train.trainNumber}/${train.departureDate}/">${Train.getTrainName(train)}</a></td>
-            <td class="deptime">${(fromStation.liveEstimateTime) ? '' : '~'}${moment(fromStation.bestEstimatedTime).format("HH:mm")}</td>
-            <td class="arrtime">${(toStation.liveEstimateTime) ? '' : '~'}${moment(toStation.bestEstimatedTime).format("HH:mm")}</td>
+            <td class="deptime ${(fromStation.liveEstimateTime) ? '' : 'maybe'}">${moment(fromStation.bestEstimatedTime).format("HH:mm")}</td>
+            <td class="arrtime ${(toStation.liveEstimateTime) ? '' : 'maybe'}">${moment(toStation.bestEstimatedTime).format("HH:mm")}</td>
         `;
 
         const rowElement = document.createElement('tr');
