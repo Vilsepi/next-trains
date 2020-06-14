@@ -1,4 +1,4 @@
-import * as Template from './modules/template.js';
+import {Template} from './modules/template.js';
 import * as Train from './modules/train.js';
 const moment = window.moment;
 
@@ -24,25 +24,23 @@ function modifyMomentLocale() {
 
 async function main() {
     modifyMomentLocale();
-    const stationHeadingElement = document.getElementById("stationHeading");
-    const messageElement = document.getElementById("messageBox");
+    const t = new Template();
 
     const urlParams = new URLSearchParams(window.location.search);
     const fromStationCode = urlParams.get('from');
     const toStationCode = urlParams.get('to');
 
     if (!fromStationCode || !toStationCode) {
-        console.error("From and to query parameters not given");
-        messageElement.innerHTML = `Syötä lähde- ja kohdeasema queryparametreina<br>Esimerkiksi: <a href="/?from=TKL&to=HKI">${window.location.hostname}/?from=TKL&to=HKI</a><br><a href="https://rata.digitraffic.fi/api/v1/metadata/stations">Katso asemien tunnisteet täältä.</a>`;
-        return;
+        t.setMessage(`Syötä lähde- ja kohdeasema queryparametreina<br>Esimerkiksi: <a href="/?from=TKL&to=HKI">${window.location.hostname}/?from=TKL&to=HKI</a><br><a href="https://rata.digitraffic.fi/api/v1/metadata/stations">Katso asemien tunnisteet täältä.</a>`);
+        throw "From and to query parameters not given";
     }
 
-    stationHeadingElement.innerHTML = `${fromStationCode} &#8680; ${toStationCode}`;
+    t.setTitle(`${fromStationCode} &#8680; ${toStationCode}`);
 
     const response = await Train.getTrainsForStation(fromStationCode, toStationCode);
     if (response.code) {
-        messageElement.innerHTML = `${response.code}<br><br>${response.errorMessage}`;
-        return;
+        t.setMessage(`${response.code}<br><br>${response.errorMessage}`);
+        throw response.errorMessage;
     }
 
     // Only show commuter trains that are traveling from fromStationCode to toStationCode
@@ -62,8 +60,7 @@ async function main() {
         return moment(a.timeTableRows[1].bestEstimatedTime) - moment(b.timeTableRows[1].bestEstimatedTime);
     });
 
-    const trainListElement = document.getElementById("trainList");
-    Template.addTableHeader(trainListElement);
+    t.addTableHeader();
 
     trains.forEach(train => {
         // After filtering in previous stage, each train should have exactly 2 stops, the from and to stations the user is interested in.
@@ -77,7 +74,7 @@ async function main() {
             console.log(JSON.stringify(train));
         }
         else {
-            Template.addTableRow(train, trainListElement);
+            t.addTableRow(train);
         }
     });
 }
