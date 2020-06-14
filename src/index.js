@@ -25,6 +25,7 @@ function modifyMomentLocale() {
 async function main() {
     modifyMomentLocale();
     const stationHeadingElement = document.getElementById("stationHeading");
+    const messageElement = document.getElementById("messageBox");
 
     const urlParams = new URLSearchParams(window.location.search);
     const fromStationCode = urlParams.get('from');
@@ -32,34 +33,33 @@ async function main() {
 
     if (!fromStationCode || !toStationCode) {
         console.error("From and to query parameters not given");
-        stationHeadingElement.innerHTML = `Syötä queryparametrit oikein! <a href="/?from=TKL&to=HKI">Kokeile tätä</a>`;
+        messageElement.innerHTML = `Syötä lähde- ja kohdeasema queryparametreina<br>Esimerkiksi: <a href="/?from=TKL&to=HKI">${window.location.hostname}/?from=TKL&to=HKI</a><br><a href="https://rata.digitraffic.fi/api/v1/metadata/stations">Katso asemien tunnisteet täältä.</a>`;
         return;
     }
 
     stationHeadingElement.innerHTML = `${fromStationCode} &#8680; ${toStationCode}`;
 
-    const response = await Train.getTrainsForStation(fromStationCode);
-
-    console.debug(JSON.stringify(response, null, 2));
+    const response = await Train.getTrainsForStation(fromStationCode, toStationCode);
+    if (response.code) {
+        messageElement.innerHTML = `${response.code}<br><br>${response.errorMessage}`;
+        return;
+    }
 
     // Only show commuter trains that are traveling from fromStationCode to toStationCode
-    // TODO To show only upcoming trains, we filter by liveEstimateTime. This has a side-effect that trains that do not have liveEstimate are not shown at all.
-    // We should instead compare timestamps against now time (or check that actualTime must not be present), and show either liveEstimateTime or scheduledTime.
-    // TODO When showing scheduledTimes, you must then filter out cancelled trains
-    // FYI train waiting for depart => non-running train
     const trains = response.filter(train =>
         ["Commuter", "Long-distance"].includes(train.trainCategory) && (
             train.timeTableRows = train.timeTableRows.filter(
                 station =>
-                    (station.stationShortCode == fromStationCode && station.type == "DEPARTURE" /*&& station.liveEstimateTime*/) ||
-                    (station.stationShortCode == toStationCode && station.type == "ARRIVAL" /*&& station.liveEstimateTime*/)
+                    (station.stationShortCode == fromStationCode && station.type == "DEPARTURE" && Train.setBestEstimate(station) && !station.cancelled) ||
+                    (station.stationShortCode == toStationCode && station.type == "ARRIVAL" && Train.setBestEstimate(station) && !station.cancelled)
             )
         ).length > 1);
 
+    console.debug(JSON.stringify(trains, null, 2));
 
     // Sort trains by destination arrival time
     trains.sort(function(a, b) {
-        return moment(a.timeTableRows[1].liveEstimateTime) - moment(b.timeTableRows[1].liveEstimateTime);
+        return moment(a.timeTableRows[1].bestEstimatedTime) - moment(b.timeTableRows[1].bestEstimatedTime);
     });
 
     const trainListElement = document.getElementById("trainList");

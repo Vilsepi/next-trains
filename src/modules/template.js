@@ -11,11 +11,11 @@ function addTableRow(train, trainListElement) {
     const fromStation = train.timeTableRows[0];
     const toStation = train.timeTableRows[1];
     const row = `
-        <td class="eta">${moment(fromStation.liveEstimateTime).fromNow()}</td>
+        <td class="eta">${moment(fromStation.bestEstimatedTime).fromNow()}</td>
         <td class="track">${fromStation.commercialTrack}</td>
         <td class="line"><a href="https://www.junat.net/fi/juna/${train.trainNumber}/${train.departureDate}/">${Train.getTrainName(train)}</a></td>
-        <td class="deptime">${moment(fromStation.liveEstimateTime).format("HH:mm")}</td>
-        <td class="arrtime">${moment(toStation.liveEstimateTime).format("HH:mm")}</td>
+        <td class="deptime">${moment(fromStation.bestEstimatedTime).format("HH:mm")}</td>
+        <td class="arrtime">${moment(toStation.bestEstimatedTime).format("HH:mm")}</td>
     `;
 
     const rowElement = document.createElement('tr');
