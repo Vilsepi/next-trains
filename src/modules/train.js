@@ -1,4 +1,5 @@
 import * as Api from './xhr.js';
+const moment = window.moment;
 
 function getTrainName(train) {
     if (train.commuterLineID) {
