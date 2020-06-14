@@ -10,7 +10,7 @@ export class Template {
 
     addTableHeader() {
         const header = document.createElement('tr');
-        header.innerHTML = '<th class="eta">Lähtee</th><th>Raide</th><th>Juna</th><th>Lähtee</th><th>Perillä &#x25BE;</th>';
+        header.innerHTML = '<th class="eta">Lähtee</th><th>Raide</th><th>Juna</th><th>Lähtee &#x25BE;</th><th>Perillä</th>';
         this.trainListElement.appendChild(header);
     }
 

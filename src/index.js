@@ -57,7 +57,7 @@ async function main() {
 
     // Sort trains by destination arrival time
     trains.sort(function(a, b) {
-        return moment(a.timeTableRows[1].bestEstimatedTime) - moment(b.timeTableRows[1].bestEstimatedTime);
+        return moment(a.timeTableRows[0].bestEstimatedTime) - moment(b.timeTableRows[0].bestEstimatedTime);
     });
 
     t.addTableHeader();
