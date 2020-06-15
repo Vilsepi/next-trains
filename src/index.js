@@ -31,8 +31,7 @@ async function main() {
     const toStationCode = urlParams.get('to');
 
     if (!fromStationCode || !toStationCode) {
-        t.setMessage(`Syötä lähde- ja kohdeasema queryparametreina<br>Esimerkiksi: <a href="/?from=TKL&to=HKI">${window.location.hostname}/?from=TKL&to=HKI</a><br><a href="https://rata.digitraffic.fi/api/v1/metadata/stations">Katso asemien tunnisteet täältä.</a>`);
-        throw "From and to query parameters not given";
+        window.location.replace("/?from=TKL&to=HKI");
     }
 
     t.setTitle(`${fromStationCode} &#8680; ${toStationCode}`);
