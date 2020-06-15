@@ -30,8 +30,9 @@ export class Template {
         this.trainListElement.appendChild(rowElement);
     }
 
-    setTitle(msg) {
-        this.stationHeadingElement.innerHTML = msg;
+    async setTitleStationNames(fromStationCode, toStationCode) {
+        const names = await Train.getStationFriendlyNames(fromStationCode, toStationCode)
+        this.stationHeadingElement.innerHTML = names.from + " - " + names.to;
     }
 
     setMessage(msg) {

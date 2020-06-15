@@ -39,4 +39,23 @@ async function getTrainsForStation(from) {
     return Api.getJson(url);
 }
 
-export {getTrainName, getTrainsForStation, setBestEstimate};
+async function getStationFriendlyNames(fromStationCode, toStationCode) {
+    const url = "metadata/stations";
+    console.log(url);
+    const stationMetadata = await Api.getJson(url);
+
+    var fromStationName = fromStationCode;
+    var toStationName = toStationCode;
+
+    stationMetadata.forEach(station => {
+        if (station.stationShortCode === fromStationCode) {
+            fromStationName = station.stationName.replace(" asema", "");
+        }
+        else if (station.stationShortCode === toStationCode) {
+            toStationName = station.stationName.replace(" asema", "");
+        }
+    });
+    return {from: fromStationName, to: toStationName};
+}
+
+export {getTrainName, getTrainsForStation, setBestEstimate, getStationFriendlyNames};

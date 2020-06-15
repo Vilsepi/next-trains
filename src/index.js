@@ -34,7 +34,7 @@ async function main() {
         window.location.replace("/?from=TKL&to=HKI");
     }
 
-    t.setTitle(`${fromStationCode} &#8680; ${toStationCode}`);
+    t.setTitleStationNames(fromStationCode, toStationCode);
 
     const response = await Train.getTrainsForStation(fromStationCode, toStationCode);
     if (response.code) {
