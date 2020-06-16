@@ -8,7 +8,8 @@ Displays the next departing local trains in Finland that get you fastest to your
 
 Enter from and to stations as query parameters:
 
-- http://train.heap.fi/?from=TKL&to=HKI
+- Tikkurila - Helsinki: http://train.heap.fi/?from=TKL&to=HKI
+- Tikkurila - Tampere: http://train.heap.fi/?from=TKL&to=TPE
 
 For a complete list of station identifiers, see [list of stations](https://rata.digitraffic.fi/api/v1/metadata/stations).
 

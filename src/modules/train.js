@@ -26,22 +26,20 @@ function setBestEstimate(station) {
 
 async function getTrainsForStation(from) {
     const params = new URLSearchParams({
-        minutes_before_departure: 120,
+        minutes_before_departure: 300,
         minutes_after_departure: 1,
-        minutes_before_arrival: 120,
+        minutes_before_arrival: 300,
         minutes_after_arrival: 1,
         train_categories: "Commuter,Long-distance",
         include_nonstopping: false
     });
 
     const url = `live-trains/station/${from}?${params.toString()}`;
-    console.log(url);
     return Api.getJson(url);
 }
 
 async function getStationFriendlyNames(fromStationCode, toStationCode) {
     const url = "metadata/stations";
-    console.log(url);
     const stationMetadata = await Api.getJson(url);
 
     var fromStationName = fromStationCode;
