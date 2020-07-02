@@ -2,6 +2,11 @@
 body {
   margin: 0px;
   font-family: sans-serif;
+  color: #444;
+}
+
+.header {
+  background-color: #0aa652;
 }
 
 .column {
@@ -10,7 +15,9 @@ body {
 }
 
 h1 {
-  margin: 25px;
+  color: #fff;
+  margin: 0;
+  padding: 25px;
   font-size: 18pt;
 }
 
@@ -26,21 +33,30 @@ table {
 }
 
 th {
-  font-size: 11pt;
-  background-color: #fff;
-  color: #333;
-  padding: 4px 0px;
+  vertical-align: bottom;
+  font-size: 10pt;
+  background-color: #0aa652;
+  color: #fff;
+  padding: 8px 0px;
   text-align: center;
 }
 
 td {
-  font-size: 16pt;
-  padding: 8px 0px;
+  font-size: 14pt;
+  padding: 10px 0px;
   text-align: center;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #f2f2f2;
 }
 
-.eta {
+.lalign {
+  text-align: left;
+}
+
+.calign {
+  text-align: center;
+}
+
+.ralign {
   text-align: right;
 }
 
@@ -50,19 +66,28 @@ td {
 
 .line {
   font-weight: bold;
+  min-width: 25%;
 }
 
-.deptime {
-  color: #bbb;
+.line > a {
+  color: #0aa652;
+}
+
+/*.deptime {
+  color: #333;
 }
 
 .arrtime {
-  color: #bbb;
-}
+  color: #333;
+}*/
 
 .maybe {
-  font-style: italic;
-  opacity: 0.5;
+  opacity: 0.7;
+}
+
+.maybe:before {
+  content: "~";
+  font-size: 10pt;
 }
 
 a {
@@ -71,9 +96,21 @@ a {
 }
 
 a:hover {
-  color: #fa0043;
+  color: #000;
   text-decoration: none;
 }
+
+.footer {
+  margin: 60px 0 20px 0;
+  text-align: center;
+
+}
+
+.footer > a {
+  color: #ccc;
+  font-size: 10pt;
+}
+
 
 @media only screen and (max-width: 600px) {
   .column {

@@ -10,7 +10,7 @@ export class Template {
 
     addTableHeader() {
         const header = document.createElement('tr');
-        header.innerHTML = '<th class="eta">Lähtee</th><th>Raide</th><th>Juna</th><th>Lähtee</th><th>Perillä &#x25BE;</th>';
+        header.innerHTML = '<th class="ralign">Lähtee</th><th class="calign">Raide</th><th>Juna</th><th class="calign">Lähtee</th><th class="lalign">Perillä &#x25BE;</th>';
         this.trainListElement.appendChild(header);
     }
 
@@ -18,11 +18,11 @@ export class Template {
         const fromStation = train.timeTableRows[0];
         const toStation = train.timeTableRows[1];
         const row = `
-            <td class="eta">${moment(fromStation.bestEstimatedTime).fromNow()}</td>
+            <td class="ralign ${(fromStation.liveEstimateTime) ? '' : 'maybe'}">${moment(fromStation.bestEstimatedTime).fromNow()}</td>
             <td class="track">${fromStation.commercialTrack}</td>
             <td class="line"><a href="https://www.junat.net/fi/juna/${train.trainNumber}/${train.departureDate}/">${Train.getTrainName(train)}</a></td>
-            <td class="deptime ${(fromStation.liveEstimateTime) ? '' : 'maybe'}">${moment(fromStation.bestEstimatedTime).format("HH:mm")}</td>
-            <td class="arrtime ${(toStation.liveEstimateTime) ? '' : 'maybe'}">${moment(toStation.bestEstimatedTime).format("HH:mm")}</td>
+            <td class="calign deptime">${moment(fromStation.bestEstimatedTime).format("HH:mm")}</td>
+            <td class="lalign arrtime">${moment(toStation.bestEstimatedTime).format("HH:mm")}</td>
         `;
 
         const rowElement = document.createElement('tr');
