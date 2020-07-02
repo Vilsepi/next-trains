@@ -22,13 +22,24 @@ function modifyMomentLocale() {
     });
 }
 
+const stationShortcuts = {
+    "helsinki": "HKI",
+    "pasila": "PSL",
+    "tampere": "TPE",
+    "tikkurila": "TKL",
+}
+
+function getStationCodeFromQueryParameter(param) {
+    return stationShortcuts[param] ? stationShortcuts[param] : param;
+}
+
 async function main() {
     modifyMomentLocale();
     const t = new Template();
 
     const urlParams = new URLSearchParams(window.location.search);
-    const fromStationCode = urlParams.get('from');
-    const toStationCode = urlParams.get('to');
+    const fromStationCode = getStationCodeFromQueryParameter(urlParams.get('from'));
+    const toStationCode = getStationCodeFromQueryParameter(urlParams.get('to'));
 
     if (!fromStationCode || !toStationCode) {
         window.location.replace("/?from=TKL&to=HKI");

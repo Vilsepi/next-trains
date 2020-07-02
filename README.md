@@ -11,7 +11,7 @@ Enter `from` and `to` stations as query parameters:
 - Tikkurila - Helsinki: http://train.heap.fi/?from=TKL&to=HKI
 - Tikkurila - Tampere: http://train.heap.fi/?from=TKL&to=TPE
 
-For a complete list of station identifiers, see [list of stations](https://rata.digitraffic.fi/api/v1/metadata/stations).
+The value for the query parameter is the `stationShortCode` of the station you want. For a complete list of station identifiers, see [list of stations](https://rata.digitraffic.fi/api/v1/metadata/stations).
 
 ## Attribution
 
