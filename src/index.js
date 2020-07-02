@@ -42,7 +42,7 @@ async function main() {
     const toStationCode = getStationCodeFromQueryParameter(urlParams.get('to'));
 
     if (!fromStationCode || !toStationCode) {
-        window.location.replace("/?from=TKL&to=HKI");
+        window.location.replace("/?from=tikkurila&to=helsinki");
     }
 
     t.setTitleStationNames(fromStationCode, toStationCode);
