@@ -96,7 +96,7 @@ async function main() {
             console.warn(`Train ${Train.getTrainName(train)} (${train.trainNumber}) has interesting stops in unexpected order:\n${JSON.stringify(train, null, 1)}`);
         }
         else if (trainsListed < MAX_NUMBER_OF_TRAINS) {
-            if (moment(train.timeTableRows[0].bestEstimatedTime).isAfter(moment().format())) {
+            if (moment(train.timeTableRows[0].bestEstimatedTime).isAfter(moment().subtract(120, 'seconds'))) {
                 t.addTableRow(train);
                 trainsListed++;
             }
