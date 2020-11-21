@@ -72,7 +72,7 @@ async function main() {
 
     t.addTableHeader();
 
-    const MAX_NUMBER_OF_TRAINS = 10;
+    const MAX_NUMBER_OF_TRAINS = 6;
     var trainsListed = 0;
     trains.forEach(train => {
         // After filtering in previous stage, each train should have exactly 2 stops, the from and to stations the user is interested in.
@@ -95,9 +95,11 @@ async function main() {
         else if (train.timeTableRows[0].stationShortCode != fromStationCode || train.timeTableRows[1].stationShortCode != toStationCode) {
             console.warn(`Train ${Train.getTrainName(train)} (${train.trainNumber}) has interesting stops in unexpected order:\n${JSON.stringify(train, null, 1)}`);
         }
-        else if (trainsListed <= MAX_NUMBER_OF_TRAINS) {
-            t.addTableRow(train);
-            trainsListed++;
+        else if (trainsListed < MAX_NUMBER_OF_TRAINS) {
+            if (moment(train.timeTableRows[0].bestEstimatedTime).isAfter(moment().format())) {
+                t.addTableRow(train);
+                trainsListed++;
+            }
         }
     });
 }
