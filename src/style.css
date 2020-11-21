@@ -7,20 +7,7 @@ body {
 
 .header {
   background-color: #0aa652;
-  padding: 10px 10px 20px 10px;
-}
-
-.quicklinks {
-  margin: 15px;
-}
-
-.quicklinks > a {
-  color: #fff;
-  font-size: 10pt;
-  margin: 0 5px;
-  padding: 8px 12px;
-  border: 1px solid #fff;
-  border-radius: 8px;
+  padding: 10px 10px 10px 10px;
 }
 
 .column {
@@ -51,13 +38,13 @@ th {
   font-size: 10pt;
   background-color: #0aa652;
   color: #fff;
-  padding: 8px 0px;
+  padding: 10px 0px;
   text-align: center;
 }
 
 td {
   font-size: 14pt;
-  padding: 10px 0px;
+  padding: 15px 0px;
   text-align: center;
   border-top: 1px solid #f2f2f2;
 }
@@ -114,14 +101,27 @@ a:hover {
   text-decoration: none;
 }
 
-.footer {
-  margin: 60px 0 20px 0;
+.quicklinks {
+  width: 100%;
   text-align: center;
+  margin: 50px 0;
+}
 
+.quicklinks > a {
+  color: #aaa;
+  font-size: 10pt;
+  line-height: 250%;
+}
+
+.footer {
+  text-align: center;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
 }
 
 .footer > a {
-  color: #ccc;
+  color: #aaa;
   font-size: 10pt;
 }
 
