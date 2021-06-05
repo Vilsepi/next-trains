@@ -72,7 +72,7 @@ async function main() {
 
     t.addTableHeader();
 
-    const MAX_NUMBER_OF_TRAINS = 5;
+    const MAX_NUMBER_OF_TRAINS = 10;
     var trainsListed = 0;
     trains.forEach(train => {
         // After filtering in previous stage, each train should have exactly 2 stops, the from and to stations the user is interested in.
