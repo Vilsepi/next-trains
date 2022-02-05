@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install AWS CLI
+        run: pip install awscli
+      - name: NPM install
+        run: npm install
+      - name: Test
+        run: npm run test
