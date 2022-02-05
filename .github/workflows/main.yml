@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: 'http://train.heap.fi'
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -14,3 +17,5 @@ jobs:
         run: npm run test
       - name: Install AWS CLI tools
         run: pip install awscli
+      - name: Deploy to production
+        run: aws s3 sync src s3://train.heap.fi/ --region eu-west-1 --delete
