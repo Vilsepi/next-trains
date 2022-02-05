@@ -104,19 +104,18 @@ a:hover {
 .quicklinks {
   width: 100%;
   text-align: center;
-  margin: 50px 0;
+  margin: 20px 0;
 }
 
 .quicklinks > a {
   color: #aaa;
   font-size: 10pt;
-  line-height: 250%;
+  line-height: 300%;
 }
 
 .footer {
+  margin: 150px 0 20px 0;
   text-align: center;
-  position: fixed;
-  bottom: 15px;
   width: 100%;
 }
 
