@@ -1,6 +1,6 @@
 # Next trains
 
-[![Build Status](https://travis-ci.org/Vilsepi/next-trains.svg?branch=master)](https://travis-ci.org/Vilsepi/next-trains)
+[![Build Status](https://github.com/Vilsepi/next-trains/actions/workflows/main.yml/badge.svg)](https://github.com/Vilsepi/next-trains/actions)
 
 Displays the next departing trains in Finland that get you fastest to your destination.
 
